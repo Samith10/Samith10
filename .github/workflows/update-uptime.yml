@@ -18,7 +18,7 @@ jobs:
 
       - name: Calculate Uptime and Update README
         env:
-          BIRTHDAY: "1998-09-30"
+          BIRTHDAY: "1998-09-30" # Set your actual birthday here
         run: |
           # Calculate Stats
           BDAY_UTC=$(date -d "$BIRTHDAY" +%s)
@@ -30,35 +30,27 @@ jobs:
           # Build the URL
           UPTIME_STRING="$%20uptime%3B%20$CURRENT_TIME%20up%20$DAYS%20days%2C%201%20user%2C%20load%20average%3A%20$L1%2C%20$L5%2C%20$L15"
           NEW_URL="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=900&lines=$UPTIME_STRING"
-          
-          # Use a literal string for the HTML
           export NEW_HTML="<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>"
 
-          # Python logic
+          # Python Surgical Replacement
           python3 -c "
-          import os
+          import os, re
           new_line = os.getenv('NEW_HTML')
-          start_marker = ''
-          end_marker = ''
-          
           with open('README.md', 'r') as f:
-              lines = f.readlines()
+              content = f.read()
           
-          new_content = []
-          skip = False
-          for line in lines:
-              if start_marker in line:
-                  new_content.append(line) # Keep the start marker
-                  new_content.append(new_line + '\n') # Add the new image
-                  skip = True # Start skipping the old content
-              elif end_marker in line:
-                  new_content.append(line) # Keep the end marker
-                  skip = False # Stop skipping
-              elif not skip:
-                  new_content.append(line)
+          # This regex specifically targets the gap between markers
+          pattern = r'.*?'
+          replacement = f'\n{new_line}\n'
           
-          with open('README.md', 'w') as f:
-              f.writelines(new_content)
+          if '' in content:
+              new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+              with open('README.md', 'w') as f:
+                  f.write(new_content)
+              print('Successfully updated.')
+          else:
+              print('Error: Markers not found in README.md')
+              exit(1)
           "
       - name: Commit and Force-Push
         run: |
