@@ -12,7 +12,6 @@
   <br>
   <img width=100% src="https://capsule-render.vercel.app/api?type=waving&height=120&color=154f52&" alt="header"/> 
   <br>
-  <br>
 </div>
 
 <div>
@@ -25,8 +24,7 @@
 </div>
 
 <!--UPTIME_START-->
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=32CD32&width=1000&lines=%24+who;samith;%24+uptime;+23:20:11+up+9981+days%2C+4%3A36%2C++1+users%2C++load+average%3A+0.80%2C+0.14%2C+0.59" alt="Typing SVG" />
-</a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=32CD32&width=1000&lines=%24+who;samith;%24+uptime;+17:55:37+up+9992+days%2C+7%3A57%2C++1+users%2C++load+average%3A+0.33%2C+0.41%2C+0.83" alt="Typing SVG" /></a>
 <!--UPTIME_END-->
 
 
