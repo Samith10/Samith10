@@ -1,9 +1,3 @@
-<img width=100% src="https://capsule-render.vercel.app/api?type=waving&height=120&color=154f52&" alt="header"/> 
-
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=435&lines=%24+whoami;samith" alt="Typing SVG" /></a><br>
-
+<div><br class="Apple-interchange-newline"><img width=100% src="https://capsule-render.vercel.app/api?type=waving&height=120&color=154f52&" alt="header"/> <br><br><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=435&lines=%24+whoami;samith" alt="Typing SVG" /></a><br><br><br><!--UPTIME_START-->
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=900&lines=$%20uptime%3B+Initializing..." alt="Typing SVG" /></a>
-## Hi there
-<p align="center"> 
-  <img src="https://komarev.com/ghpvc/?username=samith10&label=Profile%20views&color=154f52&style=flat" alt="samith10" /> 
-</p>
+<!--UPTIME_END--><br>## Hi there<br><p align="center"> <br>  <img src="https://komarev.com/ghpvc/?username=samith10&label=Profile%20views&color=154f52&style=flat" alt="samith10" /> <br></p></div>
