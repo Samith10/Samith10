@@ -1,7 +1,7 @@
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&height=120&color=154f52&text=Samith%20Prabhu&animation=fadeIn" alt="header"/> 
 
 ## Hi there
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=samith10&label=Profile%20views&color=0e75b6&style=flat" alt="akshayd-05" /> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=samith10&label=Profile%20views&color=154f52&style=flat" alt="samith10" /> </p>
 
 <!--
 **Samith10/Samith10** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
