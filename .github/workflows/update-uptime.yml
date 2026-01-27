@@ -20,40 +20,46 @@ jobs:
         env:
           BIRTHDAY: "1998-09-30"
         run: |
-          # Calculate Stats in Bash
+          # Calculate Stats
           BDAY_UTC=$(date -d "$BIRTHDAY" +%s)
           NOW_UTC=$(date +%s)
           DAYS=$(( (NOW_UTC - BDAY_UTC) / 86400 ))
           L1="0.$((RANDOM % 90 + 5))"; L5="0.$((RANDOM % 90 + 5))"; L15="0.$((RANDOM % 90 + 5))"
           CURRENT_TIME=$(date +"%H:%M:%S")
           
-          # Build the encoded parts
+          # Build the URL
           UPTIME_STRING="$%20uptime%3B%20$CURRENT_TIME%20up%20$DAYS%20days%2C%201%20user%2C%20load%20average%3A%20$L1%2C%20$L5%2C%20$L15"
           NEW_URL="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=900&lines=$UPTIME_STRING"
-          NEW_LINE="<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>"
+          
+          # Use a literal string for the HTML
+          export NEW_HTML="<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>"
 
-          # Use Python with Environment Variables
-          export NEW_LINE
+          # Python logic
           python3 -c "
-          import os, re
-          new_html = os.getenv('NEW_LINE')
+          import os
+          new_line = os.getenv('NEW_HTML')
+          start_marker = ''
+          end_marker = ''
+          
           with open('README.md', 'r') as f:
-              content = f.read()
+              lines = f.readlines()
           
-          # This regex finds the markers and everything in between
-          # We use capture groups () to keep the markers themselves
-          pattern = r'().*()'
-          
-          # \\1 is the START marker, \\2 is the END marker
-          # This keeps the markers in the file so the script works next time!
-          replacement = f'\\1\n{new_html}\n\\2'
-          
-          new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+          new_content = []
+          skip = False
+          for line in lines:
+              if start_marker in line:
+                  new_content.append(line) # Keep the start marker
+                  new_content.append(new_line + '\n') # Add the new image
+                  skip = True # Start skipping the old content
+              elif end_marker in line:
+                  new_content.append(line) # Keep the end marker
+                  skip = False # Stop skipping
+              elif not skip:
+                  new_content.append(line)
           
           with open('README.md', 'w') as f:
-              f.write(new_content)
+              f.writelines(new_content)
           "
-
       - name: Commit and Force-Push
         run: |
           git config --global user.name "github-actions[bot]"
