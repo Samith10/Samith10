@@ -17,34 +17,36 @@ jobs:
           fetch-depth: 0 
 
       - name: Calculate Uptime and Update README
+        env:
+          BIRTHDAY: "1998-09-30"
         run: |
-          # Config
-          BIRTHDAY="1998-09-30"
-          
-          # Calculate Stats
+          # Calculate Stats in Bash
           BDAY_UTC=$(date -d "$BIRTHDAY" +%s)
           NOW_UTC=$(date +%s)
           DAYS=$(( (NOW_UTC - BDAY_UTC) / 86400 ))
           L1="0.$((RANDOM % 90 + 5))"; L5="0.$((RANDOM % 90 + 5))"; L15="0.$((RANDOM % 90 + 5))"
           CURRENT_TIME=$(date +"%H:%M:%S")
           
-          # Build the String
+          # Build the encoded parts
           UPTIME_STRING="$%20uptime%3B%20$CURRENT_TIME%20up%20$DAYS%20days%2C%201%20user%2C%20load%20average%3A%20$L1%2C%20$L5%2C%20$L15"
           NEW_URL="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=900&lines=$UPTIME_STRING"
-          NEW_HTML="<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>"
+          NEW_LINE="<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>"
 
-          # Use Python to safely swap the content between markers
+          # Use Python with Environment Variables
+          export NEW_LINE
           python3 -c "
-          import re
+          import os, re
+          new_html = os.getenv('NEW_LINE')
           with open('README.md', 'r') as f:
               content = f.read()
           
           pattern = r'().*()'
-          replacement = f'\\1\n{NEW_HTML}\n\\2'
+          replacement = f'\\1\n{new_html}\n\\2'
           new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
           
           with open('README.md', 'w') as f:
               f.write(new_content)
+          print('Successfully updated README markers.')
           "
 
       - name: Commit and Force-Push
