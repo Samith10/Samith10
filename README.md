@@ -1,3 +1,5 @@
+<img width=100% src="[https://capsule-render.vercel.app/api?type=waving&color=D9BED1&height=120&section=header](https://capsule-render.vercel.app/api?type=waving&height=120&color=154f52&text=Samith%20Prabhu&animation=fadeIn)" alt="header"/> 
+
 ## Hi there
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=samith10&label=Profile%20views&color=0e75b6&style=flat" alt="akshayd-05" /> </p>
 
