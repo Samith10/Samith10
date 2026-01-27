@@ -40,13 +40,18 @@ jobs:
           with open('README.md', 'r') as f:
               content = f.read()
           
+          # This regex finds the markers and everything in between
+          # We use capture groups () to keep the markers themselves
           pattern = r'().*()'
+          
+          # \\1 is the START marker, \\2 is the END marker
+          # This keeps the markers in the file so the script works next time!
           replacement = f'\\1\n{new_html}\n\\2'
+          
           new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
           
           with open('README.md', 'w') as f:
               f.write(new_content)
-          print('Successfully updated README markers.')
           "
 
       - name: Commit and Force-Push
