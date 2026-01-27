@@ -18,39 +18,38 @@ jobs:
 
       - name: Calculate Uptime and Update README
         env:
-          BIRTHDAY: "1998-09-30" # Set your actual birthday here
+          BIRTHDAY: "1998-09-30" # Put your birthday here
         run: |
-          # Calculate Stats
+          # Stats Calculation
           BDAY_UTC=$(date -d "$BIRTHDAY" +%s)
           NOW_UTC=$(date +%s)
           DAYS=$(( (NOW_UTC - BDAY_UTC) / 86400 ))
-          L1="0.$((RANDOM % 90 + 5))"; L5="0.$((RANDOM % 90 + 5))"; L15="0.$((RANDOM % 90 + 5))"
+          L1="0.$((RANDOM % 90 + 10))"; L5="0.$((RANDOM % 90 + 10))"; L15="0.$((RANDOM % 90 + 10))"
           CURRENT_TIME=$(date +"%H:%M:%S")
           
-          # Build the URL
+          # String Building
           UPTIME_STRING="$%20uptime%3B%20$CURRENT_TIME%20up%20$DAYS%20days%2C%201%20user%2C%20load%20average%3A%20$L1%2C%20$L5%2C%20$L15"
           NEW_URL="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=900&lines=$UPTIME_STRING"
           export NEW_HTML="<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>"
 
-          # Python Surgical Replacement
+          # Strict Python Replacement
           python3 -c "
-          import os, re
+          import os, re, sys
           new_line = os.getenv('NEW_HTML')
           with open('README.md', 'r') as f:
               content = f.read()
           
-          # This regex specifically targets the gap between markers
+          if '' not in content or '' not in content:
+              print('CRITICAL ERROR: Markers missing. Stopping to prevent duplication.')
+              sys.exit(1)
+
           pattern = r'.*?'
           replacement = f'\n{new_line}\n'
           
-          if '' in content:
-              new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
-              with open('README.md', 'w') as f:
-                  f.write(new_content)
-              print('Successfully updated.')
-          else:
-              print('Error: Markers not found in README.md')
-              exit(1)
+          new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+          
+          with open('README.md', 'w') as f:
+              f.write(new_content)
           "
       - name: Commit and Force-Push
         run: |
