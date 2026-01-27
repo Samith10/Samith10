@@ -1,10 +1,8 @@
 name: Update Uptime Heartbeat
-
 on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
-
 jobs:
   update-readme:
     runs-on: ubuntu-latest
@@ -15,10 +13,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 
-
       - name: Calculate Uptime and Update README
         env:
-          BIRTHDAY: "1998-09-30" # Put your birthday here
+          BIRTHDAY: "1998-09-30"
         run: |
           # Stats Calculation
           BDAY_UTC=$(date -d "$BIRTHDAY" +%s)
@@ -31,26 +28,41 @@ jobs:
           UPTIME_STRING="$%20uptime%3B%20$CURRENT_TIME%20up%20$DAYS%20days%2C%201%20user%2C%20load%20average%3A%20$L1%2C%20$L5%2C%20$L15"
           NEW_URL="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=900&lines=$UPTIME_STRING"
           export NEW_HTML="<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>"
-
-          # Strict Python Replacement
+          
+          # Fixed Python Replacement
           python3 -c "
           import os, re, sys
+          
           new_line = os.getenv('NEW_HTML')
+          
           with open('README.md', 'r') as f:
               content = f.read()
           
-          if '' not in content or '' not in content:
+          # Check for markers
+          if '<!--UPTIME_START-->' not in content or '<!--UPTIME_END-->' not in content:
               print('CRITICAL ERROR: Markers missing. Stopping to prevent duplication.')
               sys.exit(1)
-
-          pattern = r'.*?'
-          replacement = f'\n{new_line}\n'
           
+          # Pattern that captures everything INCLUDING the markers and content between them
+          pattern = r'<!--UPTIME_START-->.*?<!--UPTIME_END-->'
+          
+          # Replacement includes the markers with new content between
+          replacement = f'<!--UPTIME_START-->\n{new_line}\n<!--UPTIME_END-->'
+          
+          # Replace with DOTALL flag to match across newlines
           new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+          
+          # Safety check: ensure we only have one occurrence of each marker
+          if new_content.count('<!--UPTIME_START-->') != 1 or new_content.count('<!--UPTIME_END-->') != 1:
+              print('ERROR: Multiple marker sets detected. Aborting.')
+              sys.exit(1)
           
           with open('README.md', 'w') as f:
               f.write(new_content)
+          
+          print('Successfully replaced content between markers')
           "
+          
       - name: Commit and Force-Push
         run: |
           git config --global user.name "github-actions[bot]"
@@ -61,6 +73,6 @@ jobs:
             echo "No changes to commit"
             exit 0
           fi
-
+          
           git commit --amend -m "System heartbeat: $(date +'%Y-%m-%d %H:%M:%S')" || git commit -m "System heartbeat: $(date +'%Y-%m-%d %H:%M:%S')"
           git push --force
