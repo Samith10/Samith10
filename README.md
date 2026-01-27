@@ -1,4 +1,5 @@
 <p align="center"> <br>  <img src="https://komarev.com/ghpvc/?username=samith10&label=Profile%20views&color=154f52&style=flat" alt="samith10" /> <br></p></div>
+<hr>
 <div><br><img width=100% src="https://capsule-render.vercel.app/api?type=waving&height=120&color=154f52&" alt="header"/> <br><br>
 
 <!--UPTIME_START-->
