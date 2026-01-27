@@ -1,0 +1,51 @@
+name: Update Uptime Heartbeat
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Maximum frequency: every 5 minutes
+  workflow_dispatch:      # Allows manual trigger for testing
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Calculate Uptime and Update README
+        run: |
+          # Config
+          BIRTHDAY="1998-09-30"
+          
+          # Calculate Uptime
+          BDAY_UTC=$(date -d "$BIRTHDAY" +%s)
+          NOW_UTC=$(date +%s)
+          DIFF_SECONDS=$((NOW_UTC - BDAY_UTC))
+          DAYS=$((DIFF_SECONDS / 86400))
+          
+          # Randomized Load Average (0.05 to 0.95)
+          L1="0.$((RANDOM % 90 + 5))"
+          L5="0.$((RANDOM % 90 + 5))"
+          L15="0.$((RANDOM % 90 + 5))"
+          
+          # Create Encoded String
+          CURRENT_TIME=$(date +"%H:%M:%S")
+          UPTIME_STRING="$%20uptime%3B%20$CURRENT_TIME%20up%20$DAYS%20days%2C%201%20user%2C%20load%20average%3A%20$L1%2C%20$L5%2C%20$L15"
+          
+          # Build URL
+          NEW_URL="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=435&lines=$UPTIME_STRING"
+          
+          # Update README between markers
+          sed -i "//,//c\\n<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>\n" README.md
+
+      - name: Commit and Force-Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit --amend -m "System heartbeat: $(date +'%Y-%m-%d %H:%M:%S')" || git commit -m "System heartbeat: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push --force
