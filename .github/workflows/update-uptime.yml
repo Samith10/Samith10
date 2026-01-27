@@ -24,9 +24,14 @@ jobs:
           L1="0.$((RANDOM % 90 + 10))"; L5="0.$((RANDOM % 90 + 10))"; L15="0.$((RANDOM % 90 + 10))"
           CURRENT_TIME=$(date +"%H:%M:%S")
           
-          # String Building (note: escaped $ for shell)
-          UPTIME_STRING="\$%20uptime%3B%20$CURRENT_TIME%20up%20$DAYS%20days%2C%201%20user%2C%20load%20average%3A%20$L1%2C%20$L5%2C%20$L15"
-          NEW_URL="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=900&lines=$UPTIME_STRING"
+          # Calculate hours and minutes for uptime format (randomized)
+          HOURS=$((RANDOM % 24))
+          MINUTES=$((RANDOM % 60))
+          USERS=$((RANDOM % 5 + 1))  # 1-5 users
+          
+          # Build the multi-line typing animation string
+          LINES="%24+who;samith;%24+uptime;+$CURRENT_TIME+up+$DAYS+days%2C+$HOURS%3A$(printf '%02d' $MINUTES)%2C++$USERS+users%2C++load+average%3A+$L1%2C+$L5%2C+$L15"
+          NEW_URL="https://readme-typing-svg.demolab.com?font=&size=40&duration=3000&pause=1000&color=154F52&width=1000&lines=$LINES"
           export NEW_HTML="<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>"
           
           # Python replacement
@@ -38,40 +43,29 @@ jobs:
           with open('README.md', 'r') as f:
               content = f.read()
           
-          # Check for markers
-          if '<!--UPTIME_START-->' not in content or '<!--UPTIME_END-->' not in content:
-              print('CRITICAL ERROR: Markers missing in README.md')
-              print('Add these markers around your uptime line:')
-              print('<!--UPTIME_START-->')
-              print('<a href=\"...\">...</a>')
-              print('<!--UPTIME_END-->')
+          # Pattern to match the who/uptime combined typing-svg line
+          pattern = r'<a href=\"https://git\.io/typing-svg\"><img src=\"https://readme-typing-svg\.demolab\.com\?font=&size=40&duration=3000&pause=1000&color=154F52&width=1000&lines=%24\+who;samith;%24\+uptime[^\"]*\" alt=\"Typing SVG\" /></a>'
+          
+          # Count matches
+          matches = re.findall(pattern, content)
+          print(f'Found {len(matches)} matching uptime lines')
+          
+          if len(matches) == 0:
+              print('ERROR: No matching uptime line found in README.md')
+              print('Looking for line with: who;samith;uptime')
               sys.exit(1)
           
-          # Pattern that captures everything between (and including) the markers
-          pattern = r'<!--UPTIME_START-->.*?<!--UPTIME_END-->'
-          
-          # Replacement includes the markers with new content
-          replacement = f'<!--UPTIME_START-->\n{new_line}\n<!--UPTIME_END-->'
-          
-          # Replace (should only be one match)
-          new_content, count = re.subn(pattern, replacement, content, flags=re.DOTALL)
+          # Replace with new content
+          new_content, count = re.subn(pattern, new_line, content)
           
           if count == 0:
-              print('ERROR: Markers found but pattern did not match')
-              sys.exit(1)
-          elif count > 1:
-              print(f'ERROR: Multiple marker sets found ({count})')
+              print('ERROR: Pattern matched in search but not in substitution')
               sys.exit(1)
           
-          # Final safety check
-          if new_content.count('<!--UPTIME_START-->') != 1 or new_content.count('<!--UPTIME_END-->') != 1:
-              print('ERROR: Marker count mismatch after replacement')
-              sys.exit(1)
+          print(f'✓ Successfully replaced {count} uptime line(s)')
           
           with open('README.md', 'w') as f:
               f.write(new_content)
-          
-          print(f'✓ Successfully replaced uptime line (matched {count} occurrence)')
           "
           
       - name: Commit and Push
@@ -85,7 +79,6 @@ jobs:
             exit 0
           fi
           
-          # Use amend if there's a previous commit, otherwise create new
           git commit --amend --no-edit -m "System heartbeat: $(date +'%Y-%m-%d %H:%M:%S')" 2>/dev/null || \
           git commit -m "System heartbeat: $(date +'%Y-%m-%d %H:%M:%S')"
           
