@@ -3,7 +3,7 @@
 <div><br><img width=100% src="https://capsule-render.vercel.app/api?type=waving&height=120&color=154f52&" alt="header"/> <br><br>
 
 <!--UPTIME_START-->
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=FFFFFF&width=1000&lines=%24+who;samith;%24+uptime;+22:55:45+up+9981+days%2C+5%3A28%2C+++users%2C++load+average%3A+0.68%2C+0.12%2C+0.14" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=FFFFFF&width=1000&lines=%24+who;samith;%24+uptime;+22:55:45+up+9981+days%2C+5%3A28%2C++1+users%2C++load+average%3A+0.68%2C+0.12%2C+0.14" alt="Typing SVG" /></a>
 <!--UPTIME_END-->
 
 
