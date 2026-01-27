@@ -18,7 +18,7 @@ jobs:
 
       - name: Calculate Uptime and Update README
         run: |
-          # Configuration
+          # Config
           BIRTHDAY="1998-09-30"
           
           # Calculate Uptime
@@ -39,8 +39,9 @@ jobs:
           # Build URL
           NEW_URL="https://readme-typing-svg.demolab.com?font=&duration=3000&pause=2000&color=154F52&width=900&lines=$UPTIME_STRING"
           
-          # Update README between markers
-          sed -i "//,//c\\n<a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>\n" README.md
+          # Update README
+          sed -i '//,//{ //!{ //!d; }; }' README.md
+          sed -i "//a <a href=\"https://git.io/typing-svg\"><img src=\"$NEW_URL\" alt=\"Typing SVG\" /></a>" README.md
 
       - name: Commit and Force-Push
         run: |
@@ -48,7 +49,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           
-          # This check prevents the Exit Code 1 if there's nothing new to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
             exit 0
