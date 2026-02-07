@@ -52,7 +52,7 @@ If you're building something that matters, let's talk.
 
 ## Outside Work
 
-I play football, watch F1, read pretty much everything that piques my interest/crosses my path(Tell me of your recs!), and like understanding how things work. Both taking apart problems mentally and tinkering with systems to see what makes them tick.
+I play football, watch F1, read pretty much everything that piques my interest/crosses my path(Give me some recs!), and like understanding how things work. Both taking apart problems mentally and tinkering with systems to see what makes them tick.
 
 **Email:** samithprabhu@gmail.com  
 **LinkedIn:** [linkedin.com/in/samith-prabhu](https://linkedin.com/in/samith-prabhu)
