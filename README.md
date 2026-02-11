@@ -20,7 +20,9 @@
   </p>
 </div>
 
+<!--UPTIME_START-->
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=32CD32&width=1000&lines=%24+who;samith;%24+uptime;+21:52:46+up+9992+days%2C+14%3A23%2C++1+users%2C++load+average%3A+0.36%2C+0.46%2C+0.93" alt="Typing SVG" /></a>
+<!--UPTIME_END-->
 
 ## About Me
 
