@@ -22,10 +22,8 @@
 <div>
   <p align="center">
     <!--UPTIME_START-->
-    <a href="https://git.io/typing-svg">
-      <img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=32CD32&width=1000&lines=%24+who;samith;%24+uptime;+21:52:46+up+9992+days%2C+14%3A23%2C++1+users%2C++load+average%3A+0.36%2C+0.46%2C+0.93" alt="Typing SVG" />
-    </a>
-    <!--UPTIME_END-->
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=32CD32&width=1000&lines=%24+who;samith;%24+uptime;+11:55:22+up+10014+days%2C+8%3A28%2C++1+users%2C++load+average%3A+0.89%2C+0.16%2C+0.56" alt="Typing SVG" /></a>
+<!--UPTIME_END-->
   </p>
 </div>
 
@@ -55,7 +53,7 @@ Looking for full-time software engineering roles. Backend, full-stack, platform 
 If you're building something that matters, let's talk.
 
 ## Outside Work
-I play football, watch F1, read pretty much everything that piques my interest/crosses my path(Give me some recs!), and like understanding how things work. Both taking apart problems mentally and tinkering with systems to see what makes them tick.
+I play football, watch F1, read pretty much everything that piques my interest/crosses my path(Give me some recs!), and like understanding how things work. Both, taking apart problems mentally and tinkering with systems to see what makes them tick.
 
 **Email:** samithprabhu@gmail.com  
 **LinkedIn:** [linkedin.com/in/samith-prabhu](https://linkedin.com/in/samith-prabhu)
