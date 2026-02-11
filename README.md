@@ -19,13 +19,17 @@
     </a>
   </p>
 </div>
-
-<!--UPTIME_START-->
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=32CD32&width=1000&lines=%24+who;samith;%24+uptime;+21:52:46+up+9992+days%2C+14%3A23%2C++1+users%2C++load+average%3A+0.36%2C+0.46%2C+0.93" alt="Typing SVG" /></a>
-<!--UPTIME_END-->
+<div>
+  <p align="center">
+    <!--UPTIME_START-->
+    <a href="https://git.io/typing-svg">
+      <img src="https://readme-typing-svg.demolab.com?font=&&duration=3000&pause=2000&color=32CD32&width=1000&lines=%24+who;samith;%24+uptime;+21:52:46+up+9992+days%2C+14%3A23%2C++1+users%2C++load+average%3A+0.36%2C+0.46%2C+0.93" alt="Typing SVG" />
+    </a>
+    <!--UPTIME_END-->
+  </p>
+</div>
 
 ## About Me
-
 I build systems that work when they need to. Currently a Software Engineer at Keelworks. Before this, I spent time at Ricago building compliance management systems handling real regulatory deadlines.
 
 I got into engineering because I kept seeing fixable problems. A friend complains about something taking forever, I waste time on repetitive tasks, and I think "there has to be a better way." Sometimes that's a script. Sometimes it's an entire platform.
@@ -33,7 +37,6 @@ I got into engineering because I kept seeing fixable problems. A friend complain
 Graduated with my Master's in CS at Northeastern (May 2025) and was Head TA for Scalable Distributed Systems, working with 100+ grad students. Teaching forces you to understand things deeply, and helping other engineers level up matters.
 
 ## Tech Stack
-
 **Languages:** Python, JavaScript/TypeScript, Java, Golang, SQL
 
 **Backend:** FastAPI, Flask, Express.js, Node.js
@@ -47,13 +50,11 @@ Graduated with my Master's in CS at Northeastern (May 2025) and was Head TA for 
 I work across the stack. Frontend, backend, databases, distributed systems.
 
 ## Open to Opportunities
-
 Looking for full-time software engineering roles. Backend, full-stack, platform engineering. I want to work on systems where reliability matters and technical decisions have real consequences. Healthcare, government tech, infrastructure people depend on, tools that solve actual problems.
 
 If you're building something that matters, let's talk.
 
 ## Outside Work
-
 I play football, watch F1, read pretty much everything that piques my interest/crosses my path(Give me some recs!), and like understanding how things work. Both taking apart problems mentally and tinkering with systems to see what makes them tick.
 
 **Email:** samithprabhu@gmail.com  
